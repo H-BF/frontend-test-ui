@@ -1,0 +1,1 @@
+export { MainPageHbf } from './MainPageHbf'
