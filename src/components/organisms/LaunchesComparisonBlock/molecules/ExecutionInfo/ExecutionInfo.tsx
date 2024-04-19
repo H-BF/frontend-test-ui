@@ -1,8 +1,8 @@
 import React, { FC, Fragment, useState, useEffect } from 'react'
 import { AxiosError } from 'axios'
-import { Empty, Result, Spin, Card, Typography, Badge } from 'antd'
+import { Empty, Result, Card, Typography, Badge } from 'antd'
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
-import { Spacer, UUID, Assertion, URIBlock, RequestResponseBlock } from 'components'
+import { Spacer, UUID, Assertion, URIBlock, RequestResponseBlock, CenteredLoader } from 'components'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { getAssertionsData, getRequestData, getResponseData, getJsonSchemaData } from 'api/apiExecutionsRequest'
 import { TAssertion, TExecution, TResponse, TRequest, TJSONSchema } from 'localTypes/APIExecutions'
@@ -61,7 +61,7 @@ export const ExecutionInfo: FC<TExecutionInfoProps> = ({ execution, index, isCol
   }, [execution])
 
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
 
   if (error) {

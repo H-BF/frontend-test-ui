@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect } from 'react'
 import { AxiosError } from 'axios'
-import { Empty, Result, Spin } from 'antd'
+import { Empty, Result } from 'antd'
 import { TLaunch } from 'localTypes/LaunchesBlock'
 import { TExecution } from 'localTypes/APIExecutions'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { getLaunchData } from 'api/launchesRequest'
 import { getExecutionsData } from 'api/apiExecutionsRequest'
-import { Spacer } from 'components'
+import { CenteredLoader, Spacer } from 'components'
 import { LaunchDescriptionComparison, ExecutionComparison } from './organisms'
 
 type TLaunchesComparisonBlockProps = {
@@ -57,7 +57,7 @@ export const LaunchesComparisonBlock: FC<TLaunchesComparisonBlockProps> = ({ lau
     return <Result status="error" title={error.status} subTitle={error.data?.title} />
   }
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
   if (data.length === 0 && !error && !isLoading) {
     return <Empty />

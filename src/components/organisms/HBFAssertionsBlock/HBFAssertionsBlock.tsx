@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { AxiosError } from 'axios'
-import { Empty, Result, Spin } from 'antd'
-import { Spacer } from 'components'
+import { Empty, Result } from 'antd'
+import { CenteredLoader, Spacer } from 'components'
 import { TAssertion, TFilter, THistoryAction } from 'localTypes/HBFAssertions'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { getAllAssertionsData } from 'api/hbfAssertionsRequest'
@@ -170,7 +170,7 @@ export const HBFAssertionsBlock: FC<THBFAssertionsBlockProps> = ({ id }) => {
   }
 
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
 
   if (error) {

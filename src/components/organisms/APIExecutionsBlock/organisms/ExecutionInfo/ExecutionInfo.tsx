@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, Fragment } from 'react'
-import { Empty, Result, Spin, Card, Typography } from 'antd'
+import { Empty, Result, Card, Typography } from 'antd'
 import { AxiosError } from 'axios'
-import { TitleWithNoTopMargin, Spacer, UUID, Assertion } from 'components'
+import { TitleWithNoTopMargin, Spacer, UUID, Assertion, CenteredLoader } from 'components'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { TExecution, TAssertion } from 'localTypes/APIExecutions'
 import { getExecutionData, getAssertionsData } from 'api/apiExecutionsRequest'
@@ -56,7 +56,7 @@ export const ExecutionInfo: FC<TExecutionInfoProps> = ({ id, statusFilter }) => 
   }, [id, assertions, statusFilter])
 
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
 
   if (error) {

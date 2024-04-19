@@ -1,9 +1,10 @@
 import React, { FC, useState, useEffect } from 'react'
-import { Empty, Result, Spin, Typography } from 'antd'
+import { Empty, Result, Typography } from 'antd'
 import { AxiosError } from 'axios'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { TJSONSchema } from 'localTypes/APIExecutions'
 import { getJsonSchemaData } from 'api/apiExecutionsRequest'
+import { CenteredLoader } from '../CenteredLoader'
 import { Styled } from './styled'
 
 type TJSCONSchemaProps = {
@@ -37,7 +38,7 @@ export const JSCONSchema: FC<TJSCONSchemaProps> = ({ id }) => {
   }, [id])
 
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
 
   if (error) {
