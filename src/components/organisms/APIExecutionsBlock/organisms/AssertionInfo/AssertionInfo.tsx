@@ -1,7 +1,15 @@
 import React, { FC, useState, useEffect } from 'react'
 import { AxiosError } from 'axios'
-import { Empty, Result, Spin, Card, Typography } from 'antd'
-import { Spacer, TitleWithNoTopMargin, UUID, Assertion, URIBlock, RequestResponseBlock } from 'components'
+import { Empty, Result, Card, Typography } from 'antd'
+import {
+  Spacer,
+  TitleWithNoTopMargin,
+  UUID,
+  Assertion,
+  URIBlock,
+  RequestResponseBlock,
+  CenteredLoader,
+} from 'components'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import {
   getAssertionData,
@@ -67,7 +75,7 @@ export const AssertionInfo: FC<TAssertionInfoProps> = ({ id }) => {
   }, [id])
 
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
 
   if (error) {

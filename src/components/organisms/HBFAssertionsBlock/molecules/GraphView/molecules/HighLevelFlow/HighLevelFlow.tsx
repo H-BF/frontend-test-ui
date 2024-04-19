@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Spin } from 'antd'
 import { Node, Edge } from 'reactflow'
 import 'reactflow/dist/style.css'
 import { TAssertion } from 'localTypes/HBFAssertions'
+import { CenteredLoader } from 'components'
 import { makeHighLevelFlow } from '../../utils'
 import { Flow } from './molecules'
 
@@ -26,7 +26,7 @@ export const HighLevelFlow: FC<THighLevelFlowProps> = ({ data, selectedSg, onSel
   }, [data])
 
   if (!nodes || !edges) {
-    return <Spin />
+    return <CenteredLoader />
   }
 
   return (

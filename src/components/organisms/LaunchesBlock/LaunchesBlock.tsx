@@ -1,9 +1,9 @@
 import React, { FC, Fragment, useState, useEffect } from 'react'
 import { AxiosError } from 'axios'
-import { Card, Empty, Result, Spin, Pagination } from 'antd'
+import { Card, Empty, Result, Pagination } from 'antd'
 import { DoubleRightOutlined, ClearOutlined } from '@ant-design/icons'
 import { TFilter, TLaunch } from 'localTypes/LaunchesBlock'
-import { Spacer } from 'components'
+import { CenteredLoader, Spacer } from 'components'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { getFilteredLaunchesData } from 'api/launchesRequest'
 import { ITEMS_PER_PAGE } from 'constants/Launches'
@@ -57,7 +57,7 @@ export const LaunchesBlock: FC<TLaunchesBlockProps> = ({ filters, type, currentS
     return <Result status="error" title={error.status} subTitle={error.data?.title} />
   }
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
   if (!data.length && !error && !isLoading) {
     return <Empty />
