@@ -1,10 +1,10 @@
 import React, { FC, useState, useEffect, useCallback } from 'react'
 import { AxiosError } from 'axios'
 import { useLocation, useHistory } from 'react-router-dom'
-import { Menu, Tooltip, Result, Spin, Empty } from 'antd'
+import { Menu, Tooltip, Result, Empty } from 'antd'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { BaseTemplate } from 'templates'
-import { DefaultLayout, LaunchesBlock, Spacer, LaunchesFiltersBlock } from 'components'
+import { DefaultLayout, LaunchesBlock, Spacer, LaunchesFiltersBlock, CenteredLoader } from 'components'
 import { TFilter } from 'localTypes/LaunchesBlock'
 import { getUniqueServices } from 'api'
 import { mainPageLeftList } from 'mocks'
@@ -29,6 +29,8 @@ export const MainPageAPI: FC = () => {
       .then(({ data }) => {
         setIsLoading(false)
         setApiServicesList(data.service_names)
+        history.push(`/api/${data.service_names[0]}`)
+        setApiServiceName(data.service_names[0])
       })
       .catch((error: AxiosError<TRequestErrorData>) => {
         setIsLoading(false)
@@ -40,7 +42,7 @@ export const MainPageAPI: FC = () => {
           setError({ status: 'Error while fetching' })
         }
       })
-  }, [])
+  }, [history])
 
   const [isResizable, setIsResizable] = useState(false)
   const [containerWidth, setContainerWidth] = useState<number>()
@@ -82,7 +84,7 @@ export const MainPageAPI: FC = () => {
             <DefaultLayout.Resizer onMouseDown={() => handleResize()} />
             <DefaultLayout.MenuItemsContainer>
               {isLoading ? (
-                <Spin />
+                <CenteredLoader />
               ) : (
                 <DefaultLayout.ScrollableUnderHeaderContainer>
                   <Menu

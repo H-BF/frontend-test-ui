@@ -1,10 +1,11 @@
 import React, { FC, Fragment, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { AxiosError } from 'axios'
-import { Empty, Result, Spin } from 'antd'
+import { Empty, Result } from 'antd'
 import { TExecution } from 'localTypes/APIExecutions'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { getExecutionsData } from 'api/apiExecutionsRequest'
+import { CenteredLoader } from 'components'
 import { NavElement, FiltersBlock } from './molecules'
 import { filterExecutions } from './utils'
 import { Styled } from './styled'
@@ -65,7 +66,7 @@ export const Navigation: FC<TNavigationProps> = ({ statusFilter, setStatusFilter
     return <Result status="error" title={error.status} subTitle={error.data?.title} />
   }
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
   if (!data.length && !error && !isLoading) {
     return <Empty />

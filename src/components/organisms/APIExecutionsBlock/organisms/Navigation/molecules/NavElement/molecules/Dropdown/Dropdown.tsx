@@ -1,11 +1,12 @@
 /* eslint-disable camelcase */
 import React, { FC, useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { Button, Empty, Result, Spin } from 'antd'
+import { Button, Empty, Result } from 'antd'
 import { AxiosError } from 'axios'
 import { getAssertionsData } from 'api/apiExecutionsRequest'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { TAssertion } from 'localTypes/APIExecutions'
+import { CenteredLoader } from 'components'
 import { getStatusColor } from './utils'
 import { Styled } from './styled'
 
@@ -58,7 +59,7 @@ export const Dropdown: FC<TDropdownProps> = ({ id, launchId, statusFilters }) =>
     return <Result status="error" title={error.status} subTitle={error.data?.title} />
   }
   if (isLoading) {
-    return <Spin />
+    return <CenteredLoader />
   }
   if (!assertions.length && !error && !isLoading) {
     return <Empty />
