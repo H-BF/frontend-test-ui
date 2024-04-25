@@ -1,6 +1,17 @@
 import React, { FC } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { MainPage, MainPageAPI, MainPageHbf, APILaunchPage, HBFLaunchPage, CompareAPILaunchPage } from 'pages'
+import {
+  MainPage,
+  MainPageAPI,
+  MainPageHbf,
+  APILaunchPage,
+  HBFLaunchPage,
+  CompareAPILaunchPage,
+  BarracudaLaunchsPage,
+  BarracudaTestInfoPage,
+  BarracudaTestResultPage,
+  BarracudaDiffResultPage,
+} from 'pages'
 import { BASEPREFIX } from 'constants/basePrefix'
 
 export const App: FC = () => (
@@ -26,6 +37,21 @@ export const App: FC = () => (
       </Route>
       <Route path="/compare-api-launch/:serviceId/:launchFirstId/:launchSecondId">
         <CompareAPILaunchPage />
+      </Route>
+      <Route exact path="/barracuda">
+        <BarracudaLaunchsPage />
+      </Route>
+      <Route exact path="/barracuda/search/:launchId?">
+        <BarracudaLaunchsPage />
+      </Route>
+      <Route exact path="/barracuda/test-info/:launchUuid">
+        <BarracudaTestInfoPage />
+      </Route>
+      <Route exact path="/barracuda/test-result/:testInfoUuid">
+        <BarracudaTestResultPage />
+      </Route>
+      <Route exact path="/barracuda/diff-result/:testResultUuid">
+        <BarracudaDiffResultPage />
       </Route>
     </Switch>
   </BrowserRouter>
