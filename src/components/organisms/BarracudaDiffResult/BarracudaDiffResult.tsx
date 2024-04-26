@@ -66,7 +66,7 @@ export const BarracudaDiffResult: FC<TBarracudaDiffResultProps> = ({ id }) => {
           <div>
             <EnhancedDiff
               reference={JSON.stringify(testResult.referense, null, 2)}
-              reseached={JSON.stringify(testResult.reseached, null, 2) + 'test'}
+              reseached={JSON.stringify(testResult.reseached, null, 2)}
             />
           </div>
         </Card>
