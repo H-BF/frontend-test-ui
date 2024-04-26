@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React, { FC, useState, useEffect } from 'react'
 import { AxiosError } from 'axios'
-import { Card, Result, Spin, Empty } from 'antd'
+import { Card, Result, Spin, Empty, Typography } from 'antd'
 import { TitleWithNoTopMargin, Spacer } from 'components'
 import { getTestResultByUuid } from 'api/barracudaRequest'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
@@ -46,20 +46,31 @@ export const BarracudaDiffResult: FC<TBarracudaDiffResultProps> = ({ id }) => {
   }
 
   return (
-    <Card>
-      <TitleWithNoTopMargin level={2}>Test Results</TitleWithNoTopMargin>
-      <Spacer $space={15} $samespace />
-      {!testResult && !error && !isLoading && <Empty />}
+    <>
+      <TitleWithNoTopMargin level={2}>Barracuda Test Result: diff view</TitleWithNoTopMargin>
+      <Card>
+        {!testResult && !error && !isLoading && <Empty />}
+        {testResult && (
+          <>
+            <Typography.Text type="secondary">IP: </Typography.Text>
+            {testResult.ip}
+            <Spacer $space={10} $samespace />
+            <Typography.Text type="secondary">Status: </Typography.Text>
+            {testResult.status}
+          </>
+        )}
+      </Card>
+      <Spacer $space={25} $samespace />
       {testResult && (
-        <div>
-          {testResult.uuid}
-          <br />
-          <EnhancedDiff
-            reference={JSON.stringify(testResult.referense, null, 2)}
-            reseached={JSON.stringify(testResult.reseached, null, 2) + 'test'}
-          />
-        </div>
+        <Card>
+          <div>
+            <EnhancedDiff
+              reference={JSON.stringify(testResult.referense, null, 2)}
+              reseached={JSON.stringify(testResult.reseached, null, 2) + 'test'}
+            />
+          </div>
+        </Card>
       )}
-    </Card>
+    </>
   )
 }

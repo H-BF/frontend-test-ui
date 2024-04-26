@@ -87,26 +87,28 @@ export const BarracudaTestResultList: FC<TBarracudaTestResultListProps> = ({ id,
   ]
 
   return (
-    <Card>
+    <>
       <TitleWithNoTopMargin level={2}>Barracuda Test Results</TitleWithNoTopMargin>
-      <Spacer $space={15} $samespace />
-      {!testResults.length && !error && !isLoading && <Empty />}
-      {testResults.length > 0 && (
-        <Table
-          pagination={{
-            position: ['bottomCenter'],
-            showQuickJumper: {
-              goButton: <Styled.ButtonWithMarginLeft size="small">Go</Styled.ButtonWithMarginLeft>,
-            },
-            showSizeChanger: false,
-            defaultPageSize: ITEMS_PER_PAGE,
-            hideOnSinglePage: true,
-          }}
-          dataSource={testResults.map(row => ({ ...row, key: row.uuid }))}
-          columns={columns}
-          scroll={{ x: 'max-content' }}
-        />
-      )}
-    </Card>
+      <Card>
+        <Spacer $space={15} $samespace />
+        {!testResults.length && !error && !isLoading && <Empty />}
+        {testResults.length > 0 && (
+          <Table
+            pagination={{
+              position: ['bottomCenter'],
+              showQuickJumper: {
+                goButton: <Styled.ButtonWithMarginLeft size="small">Go</Styled.ButtonWithMarginLeft>,
+              },
+              showSizeChanger: false,
+              defaultPageSize: ITEMS_PER_PAGE,
+              hideOnSinglePage: true,
+            }}
+            dataSource={testResults.map(row => ({ ...row, key: row.uuid }))}
+            columns={columns}
+            scroll={{ x: 'max-content' }}
+          />
+        )}
+      </Card>
+    </>
   )
 }

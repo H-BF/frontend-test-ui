@@ -156,46 +156,48 @@ export const BarracudaLaunchsList: FC<TBarracudaLaunchsListProps> = ({ id }) => 
   ]
 
   return (
-    <Card>
+    <>
       <TitleWithNoTopMargin level={2}>Barracuda Launchs</TitleWithNoTopMargin>
-      <Spacer $space={15} $samespace />
-      <Styled.FiltersContainer>
-        <div>
-          <Input
-            allowClear
-            placeholder="Filter by uuid"
-            value={searchText}
-            onChange={e => setSearchText(e.target.value)}
-            onPressEnter={() => handleSearch(searchText)}
+      <Card>
+        <Spacer $space={15} $samespace />
+        <Styled.FiltersContainer>
+          <div>
+            <Input
+              allowClear
+              placeholder="Filter by uuid"
+              value={searchText}
+              onChange={e => setSearchText(e.target.value)}
+              onPressEnter={() => handleSearch(searchText)}
+            />
+          </div>
+          <div>
+            <Styled.ButtonWithMarginLeft
+              onClick={() => handleSearch(searchText)}
+              icon={<SearchOutlined />}
+              type="primary"
+            />
+          </div>
+        </Styled.FiltersContainer>
+        <Spacer $space={15} $samespace />
+        {!launchs.length && !error && !isLoading && <Empty />}
+        {launchs.length > 0 && (
+          <Table
+            pagination={{
+              position: ['bottomCenter'],
+              showQuickJumper: {
+                goButton: <Styled.ButtonWithMarginLeft size="small">Go</Styled.ButtonWithMarginLeft>,
+              },
+              showSizeChanger: false,
+              defaultPageSize: ITEMS_PER_PAGE,
+              hideOnSinglePage: true,
+            }}
+            dataSource={launchs.map(row => ({ ...row, key: row.uuid }))}
+            columns={columns}
+            scroll={{ x: 'max-content' }}
+            onChange={handleChange}
           />
-        </div>
-        <div>
-          <Styled.ButtonWithMarginLeft
-            onClick={() => handleSearch(searchText)}
-            icon={<SearchOutlined />}
-            type="primary"
-          />
-        </div>
-      </Styled.FiltersContainer>
-      <Spacer $space={15} $samespace />
-      {!launchs.length && !error && !isLoading && <Empty />}
-      {launchs.length > 0 && (
-        <Table
-          pagination={{
-            position: ['bottomCenter'],
-            showQuickJumper: {
-              goButton: <Styled.ButtonWithMarginLeft size="small">Go</Styled.ButtonWithMarginLeft>,
-            },
-            showSizeChanger: false,
-            defaultPageSize: ITEMS_PER_PAGE,
-            hideOnSinglePage: true,
-          }}
-          dataSource={launchs.map(row => ({ ...row, key: row.uuid }))}
-          columns={columns}
-          scroll={{ x: 'max-content' }}
-          onChange={handleChange}
-        />
-      )}
-    </Card>
+        )}
+      </Card>
+    </>
   )
 }
