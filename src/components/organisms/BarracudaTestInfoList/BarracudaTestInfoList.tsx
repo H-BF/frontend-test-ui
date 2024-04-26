@@ -8,6 +8,7 @@ import { getTestInfos } from 'api/barracudaRequest'
 import { ITEMS_PER_PAGE } from 'constants/Barracuda'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { TTestInfo } from 'localTypes/Barracuda'
+import { Status } from './atoms'
 import { Styled } from './styled'
 
 type TBarracudaTestInfoListProps = {
@@ -54,6 +55,13 @@ export const BarracudaTestInfoList: FC<TBarracudaTestInfoListProps> = ({ id }) =
 
   const columns: ColumnsType<TColumn> = [
     {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      width: 70,
+      render: (_, { status }) => <Status status={status} />,
+    },
+    {
       title: 'UUID',
       dataIndex: 'uuid',
       key: 'uuid',
@@ -76,7 +84,7 @@ export const BarracudaTestInfoList: FC<TBarracudaTestInfoListProps> = ({ id }) =
       title: 'Version',
       dataIndex: 'version',
       key: 'version',
-      width: 150,
+      width: 70,
     },
     {
       title: 'Description',
@@ -84,17 +92,11 @@ export const BarracudaTestInfoList: FC<TBarracudaTestInfoListProps> = ({ id }) =
       key: 'description',
       width: 150,
     },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      width: 150,
-    },
   ]
 
   return (
     <Card>
-      <TitleWithNoTopMargin level={2}>Test Infos</TitleWithNoTopMargin>
+      <TitleWithNoTopMargin level={2}>Barracuda Test Infos</TitleWithNoTopMargin>
       <Spacer $space={15} $samespace />
       {!testInfos.length && !error && !isLoading && <Empty />}
       {testInfos.length > 0 && (

@@ -9,6 +9,7 @@ import { getTestResults } from 'api/barracudaRequest'
 import { ITEMS_PER_PAGE } from 'constants/Barracuda'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { TTestResult } from 'localTypes/Barracuda'
+import { Status } from './atoms'
 import { Styled } from './styled'
 
 type TBarracudaTestResultListProps = {
@@ -55,6 +56,13 @@ export const BarracudaTestResultList: FC<TBarracudaTestResultListProps> = ({ id 
 
   const columns: ColumnsType<TColumn> = [
     {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      width: 150,
+      render: (_, { status }) => <Status status={status} />,
+    },
+    {
       title: 'UUID',
       dataIndex: 'uuid',
       key: 'uuid',
@@ -73,38 +81,11 @@ export const BarracudaTestResultList: FC<TBarracudaTestResultListProps> = ({ id 
       key: 'ip',
       width: 150,
     },
-    {
-      title: 'Referense',
-      dataIndex: 'referense',
-      key: 'referense',
-      width: 150,
-      render: (_, { referense }) => <>{JSON.stringify(referense)}</>,
-    },
-    {
-      title: 'Reseached',
-      dataIndex: 'reseached',
-      key: 'reseached',
-      width: 150,
-      render: (_, { reseached }) => <>{JSON.stringify(reseached)}</>,
-    },
-    {
-      title: 'Comprasion Results',
-      dataIndex: 'comprasion_results',
-      key: 'comprasion_results',
-      width: 150,
-      render: (_, { comprasion_results }) => <>{JSON.stringify(comprasion_results)}</>,
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      width: 150,
-    },
   ]
 
   return (
     <Card>
-      <TitleWithNoTopMargin level={2}>Test Results</TitleWithNoTopMargin>
+      <TitleWithNoTopMargin level={2}>Barracuda Test Results</TitleWithNoTopMargin>
       <Spacer $space={15} $samespace />
       {!testResults.length && !error && !isLoading && <Empty />}
       {testResults.length > 0 && (

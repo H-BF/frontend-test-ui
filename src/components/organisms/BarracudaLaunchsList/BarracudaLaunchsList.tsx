@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { FC, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AxiosError } from 'axios'
@@ -9,6 +10,7 @@ import { getLaunchs } from 'api/barracudaRequest'
 import { ITEMS_PER_PAGE } from 'constants/Barracuda'
 import { TRequestErrorData, TRequestError } from 'localTypes/api'
 import { TLaunch } from 'localTypes/Barracuda'
+import { Status } from './atoms'
 import { Styled } from './styled'
 
 type TBarracudaLaunchsListProps = {
@@ -75,6 +77,13 @@ export const BarracudaLaunchsList: FC<TBarracudaLaunchsListProps> = ({ id }) => 
 
   const columns: ColumnsType<TColumn> = [
     {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      width: 70,
+      render: (_, { status, uuid }) => <Status uuid={uuid} status={status} />,
+    },
+    {
       title: 'UUID',
       dataIndex: 'uuid',
       key: 'uuid',
@@ -87,7 +96,7 @@ export const BarracudaLaunchsList: FC<TBarracudaLaunchsListProps> = ({ id }) => 
       title: 'Test Suite',
       dataIndex: 'test_suite',
       key: 'test_suite',
-      width: 150,
+      width: 70,
     },
     {
       title: 'Date',
@@ -99,13 +108,13 @@ export const BarracudaLaunchsList: FC<TBarracudaLaunchsListProps> = ({ id }) => 
       title: 'Pipeline',
       dataIndex: 'pipeline',
       key: 'pipeline',
-      width: 150,
+      width: 70,
     },
     {
       title: 'Job',
       dataIndex: 'job',
       key: 'job',
-      width: 150,
+      width: 70,
     },
     {
       title: 'Src',
@@ -117,13 +126,14 @@ export const BarracudaLaunchsList: FC<TBarracudaLaunchsListProps> = ({ id }) => 
       title: 'Commit',
       dataIndex: 'commit',
       key: 'commit',
-      width: 150,
+      width: 70,
     },
     {
       title: 'Fail',
       dataIndex: 'fail_count',
       key: 'fail_count',
       width: 150,
+      render: (_, { fail_count }) => <Styled.FailCount $quantity={fail_count || 0}>{fail_count || 0}</Styled.FailCount>,
     },
     {
       title: 'Pass',
@@ -143,17 +153,11 @@ export const BarracudaLaunchsList: FC<TBarracudaLaunchsListProps> = ({ id }) => 
       key: 'tag',
       width: 150,
     },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      width: 150,
-    },
   ]
 
   return (
     <Card>
-      <TitleWithNoTopMargin level={2}>Launchs</TitleWithNoTopMargin>
+      <TitleWithNoTopMargin level={2}>Barracuda Launchs</TitleWithNoTopMargin>
       <Spacer $space={15} $samespace />
       <Styled.FiltersContainer>
         <div>

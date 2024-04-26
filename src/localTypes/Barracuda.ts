@@ -17,6 +17,17 @@ export type TLaunchResponse = {
   launchs: TLaunch[]
 }
 
+export type TLaunchErrorResponse = {
+  launchError: [
+    {
+      uuid: string
+      launch_uuid: string
+      error_msg: string
+      stack_trace: string
+    },
+  ]
+}
+
 export type TTestInfo = {
   uuid: string
   launch_uuid: string
