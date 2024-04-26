@@ -66,7 +66,7 @@ export const BarracudaTestInfoList: FC<TBarracudaTestInfoListProps> = ({ id }) =
       dataIndex: 'uuid',
       key: 'uuid',
       width: 150,
-      render: (_, { uuid }) => <a onClick={() => history.push(`/barracuda/test-result/${uuid}`)}>{uuid}</a>,
+      render: (_, { uuid }) => <a onClick={() => history.push(`/barracuda/test-result/${id}/${uuid}`)}>{uuid}</a>,
     },
     {
       title: 'Launch UUID',

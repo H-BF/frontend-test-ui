@@ -1,5 +1,5 @@
 export const getStatusColor = (status: string): string => {
-  if (status === 'error') {
+  if (status === 'fail') {
     return 'volcano'
   }
   if (status === 'pass') {

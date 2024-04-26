@@ -1,14 +1,56 @@
 import React, { FC } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
+import { Layout, Breadcrumb } from 'antd'
+import { HomeOutlined } from '@ant-design/icons'
 import { BaseTemplate } from 'templates'
-import { BarracudaDiffResult } from 'components'
+import { DefaultLayout, BarracudaDiffResult } from 'components'
 
 export const BarracudaDiffResultPage: FC = () => {
-  const { testResultUuid } = useParams<{ testResultUuid: string }>()
+  const { launchUuid, testInfoUuid, testResultUuid } = useParams<{
+    launchUuid: string
+    testInfoUuid: string
+    testResultUuid: string
+  }>()
+
+  const breadcrumbItems = [
+    {
+      title: <HomeOutlined />,
+      key: 'home',
+    },
+    {
+      title: <Link to="/barracuda/">Barracuda</Link>,
+      key: 'barracuda',
+    },
+    {
+      title: <Link to={`/barracuda/search/${launchUuid}`}>{launchUuid}</Link>,
+      key: 'launchSearch',
+    },
+    {
+      title: <Link to={`/barracuda/test-info/${launchUuid}`}>Launch Test Info</Link>,
+      key: 'testInfo',
+    },
+    {
+      title: <Link to={`/barracuda/test-result/${launchUuid}/${testInfoUuid}`}>{testInfoUuid} Results</Link>,
+      key: 'testResult',
+    },
+    {
+      title: 'Diff Result',
+      key: 'diffResult',
+    },
+  ]
 
   return (
     <BaseTemplate>
-      <BarracudaDiffResult id={testResultUuid} />
+      <Layout>
+        <DefaultLayout.LayoutWithPadding>
+          <DefaultLayout.BreadcrumbContainer>
+            <Breadcrumb items={breadcrumbItems} />
+          </DefaultLayout.BreadcrumbContainer>
+          <DefaultLayout.ContentContainer>
+            <BarracudaDiffResult id={testResultUuid} />
+          </DefaultLayout.ContentContainer>
+        </DefaultLayout.LayoutWithPadding>
+      </Layout>
     </BaseTemplate>
   )
 }

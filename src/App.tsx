@@ -47,10 +47,10 @@ export const App: FC = () => (
       <Route exact path="/barracuda/test-info/:launchUuid">
         <BarracudaTestInfoPage />
       </Route>
-      <Route exact path="/barracuda/test-result/:testInfoUuid">
+      <Route exact path="/barracuda/test-result/:launchUuid/:testInfoUuid">
         <BarracudaTestResultPage />
       </Route>
-      <Route exact path="/barracuda/diff-result/:testResultUuid">
+      <Route exact path="/barracuda/diff-result/:launchUuid/:testInfoUuid/:testResultUuid">
         <BarracudaDiffResultPage />
       </Route>
     </Switch>

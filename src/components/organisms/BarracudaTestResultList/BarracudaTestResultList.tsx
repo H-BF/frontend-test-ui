@@ -14,13 +14,14 @@ import { Styled } from './styled'
 
 type TBarracudaTestResultListProps = {
   id: string
+  launchId: string
 }
 
 type TColumn = TTestResult & {
   key: string
 }
 
-export const BarracudaTestResultList: FC<TBarracudaTestResultListProps> = ({ id }) => {
+export const BarracudaTestResultList: FC<TBarracudaTestResultListProps> = ({ id, launchId }) => {
   const [testResults, setTestResults] = useState<TTestResult[]>([])
   const [error, setError] = useState<TRequestError | undefined>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -67,7 +68,9 @@ export const BarracudaTestResultList: FC<TBarracudaTestResultListProps> = ({ id 
       dataIndex: 'uuid',
       key: 'uuid',
       width: 150,
-      render: (_, { uuid }) => <a onClick={() => history.push(`/barracuda/diff-result/${uuid}`)}>{uuid}</a>,
+      render: (_, { uuid }) => (
+        <a onClick={() => history.push(`/barracuda/diff-result/${launchId}/${id}/${uuid}`)}>{uuid}</a>
+      ),
     },
     {
       title: 'Test Info UUID',
