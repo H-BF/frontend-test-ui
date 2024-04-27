@@ -9,6 +9,10 @@ export const mainPageLeftList = [
     key: 'hbf',
     label: 'Func reports',
   },
+  {
+    key: 'barracuda',
+    label: 'Barracuda',
+  },
 ]
 
 export const mainPageRightList: TLaunch[] = [
