@@ -94,4 +94,32 @@ module.exports = function (app) {
       changeOrigin: true,
     }),
   )
+  app.use(
+    '/result/v1/launchs/',
+    createProxyMiddleware({
+      target: 'http://testops-ingress-controller.testops.svc.k8s.prod-dl/barracuda/',
+      changeOrigin: true,
+    }),
+  )
+  app.use(
+    '/result/v1/launch_error/',
+    createProxyMiddleware({
+      target: 'http://testops-ingress-controller.testops.svc.k8s.prod-dl/barracuda/',
+      changeOrigin: true,
+    }),
+  )
+  app.use(
+    '/result/v1/test_info/',
+    createProxyMiddleware({
+      target: 'http://testops-ingress-controller.testops.svc.k8s.prod-dl/barracuda/',
+      changeOrigin: true,
+    }),
+  )
+  app.use(
+    '/result/v1/tests_result/',
+    createProxyMiddleware({
+      target: 'http://testops-ingress-controller.testops.svc.k8s.prod-dl/barracuda/',
+      changeOrigin: true,
+    }),
+  )
 }
